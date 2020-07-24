@@ -35,7 +35,7 @@ class OrderController extends AdminController
             $grid->model()->where('user_name', '=', $user);
             // 第一列显示id字段，并将这一列设置为可排序列
             //$grid->id->code()->sortable();
-            $grid->img('图片')->image('',100,100);
+            $grid->img('图片')->image('http://shopping/img',100,100);
             $grid->id('ID')->sortable()->setAttributes(['style' => 'font-size:10px']);
             $grid->name('名称')->label();
             $grid->amount('价格');
