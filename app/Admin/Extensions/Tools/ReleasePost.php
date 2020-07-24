@@ -15,6 +15,7 @@ use App\Admin\Model\Shop;
 use App\Admin\Model\Good;
 use App\Admin\Model\OrderForm;
 use Carbon\Carbon;
+use Dcat\Admin\Admin;
 
 class ReleasePost extends BatchAction
 {
@@ -23,6 +24,7 @@ class ReleasePost extends BatchAction
     // 注意action的构造方法参数一定要给默认值
     public function __construct($title = null, $action = 1)
     {
+
         $this->title = $title;
         $this->action = $action;
     }
@@ -48,6 +50,7 @@ class ReleasePost extends BatchAction
                 DB::beginTransaction();
                 try {
                     //获取商品ID、数量 查询合并
+                    $user = Admin::user()->id;
                     $order = Shop::where('id', $id)->first();
                     $goodid = Shop::where('id', $id)->value('good_id');
                     //获得店铺库存 原子性操作
@@ -60,6 +63,7 @@ class ReleasePost extends BatchAction
                     //获取订单的商品ID
                     $img = Good::where('id', $goodid)->value('img');
                     OrderForm::insert([
+                        'user_name'=>$user,
                         'order_id' => $id,
                         'count' => $order->count,
                         'good_id' => $order->good_id,

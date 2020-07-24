@@ -26,7 +26,7 @@ class ContentController extends AdminController
             ->body(function (Row $row) {
                 $row->column(6, function (Column $column) {
                     $column->row(Dashboard::title());
-                    $column->row(new Examples\Tickets());
+                    $column->row(Dashboard::title());
                 });
 
                 $row->column(6, function (Column $column) {
@@ -35,8 +35,8 @@ class ContentController extends AdminController
                         $row->column(6, new Examples\NewDevices());
                     });
 
-                    $column->row(new Examples\Sessions());
-                    $column->row(new Examples\ProductOrders());
+                    $column->row(Dashboard::title());
+                    $column->row(Dashboard::title());
                 });
             });
     }
